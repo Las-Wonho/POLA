@@ -19,4 +19,13 @@ router.get('/', function(req, res, next) {
     });
 });
 
+router.get('/page', function(req, res, next) {
+    var f = (mes) => "'" + mes + "'";
+    var query = req.query;
+
+    connection.query("select * from GroupTable group_SC="+f(query.GSC),(err, row)=>{
+        res.send(row.slice(query.ack,query.number));
+    });
+});
+
 module.exports = router;
